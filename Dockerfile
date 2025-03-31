@@ -1,23 +1,17 @@
-# Use official Node.js LTS version
+# Use an official Node.js image as base
 FROM node:18
 
 # Set the working directory inside the container
 WORKDIR /src
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install --only=production
-
-# Copy the entire project into the container
+# Copy the entire project first
 COPY . .
 
-# Build TypeScript files
-RUN npm run build
+# Install dependencies
+RUN npm install
 
-# Expose the port Render will use
-EXPOSE 3000
+# Expose the port the service runs on
+EXPOSE 5000
 
 # Start the application
 CMD ["npm", "start"]
