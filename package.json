@@ -10,7 +10,8 @@
     "postinstall": "npx tsc --build",
     "start:dev": "npx ts-node app/server.ts",
     "start:prod": "./node_modules/pm2/bin/pm2-runtime start pm2.json",
-    "lint": "eslint 'app/**/*.ts' --fix"
+    "lint": "eslint 'app/**/*.ts' --fix",
+    "test": "echo \"No tests available\""
   },
   "keywords": [],
   "author": "",
