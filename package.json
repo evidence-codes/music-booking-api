@@ -35,7 +35,8 @@
     "pm2": "^6.0.5",
     "redis": "^4.7.0",
     "reflect-metadata": "^0.2.2",
-    "sequelize": "^6.37.7"
+    "sequelize": "^6.37.7",
+    "typescript": "^5.8.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -53,7 +54,6 @@
     "nodemon": "^3.1.9",
     "prettier": "^3.5.3",
     "sequelize-typescript": "^2.1.6",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+    "ts-node": "^10.9.2"
   }
 }
