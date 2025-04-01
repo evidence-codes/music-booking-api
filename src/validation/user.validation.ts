@@ -3,7 +3,7 @@ import validate from "./validate";
 // import { timezoneValidator } from './session.validate';
 
 const loginSchema = Joi.object({
-  email: Joi.string().email().optional(),
+  email: Joi.string().email().required(),
   password: Joi.string().required(),
 });
 

@@ -7,8 +7,10 @@ import { isBlacklisted } from "../utils/tokenBlacklist";
 import jwt from "jsonwebtoken";
 
 import { Request } from "../types/express";
+import { ArtistRequest } from "../controllers/artist.controller";
 
 import { User } from "../models/user.model";
+import { Artist } from "../models/artist.model";
 
 export const isAuthenticated = async (
   req: Request,
@@ -41,6 +43,47 @@ export const isAuthenticated = async (
     }
     req.user = user;
     req.userId = userId;
+    next();
+  } catch (error) {
+    if (error instanceof jwt.TokenExpiredError) {
+      return next(new UnauthorizedError("Authentication token has expired."));
+    } else {
+      return next(new UnauthorizedError("Authentication token is invalid."));
+    }
+  }
+};
+
+export const isArtistAuthenticated = async (
+  req: ArtistRequest,
+  _res: Response,
+  next: NextFunction
+) => {
+  const authorizationHeader = req.headers["authorization"];
+  console.log({ authorizationHeader });
+  if (!authorizationHeader) {
+    return next(new UnauthorizedError("No authentication token provided."));
+  }
+
+  const token = authorizationHeader.split(" ")[1];
+
+  try {
+    if (!token) {
+      return next(new UnauthorizedError("No authentication token provided."));
+    }
+
+    if (isBlacklisted(token)) {
+      return next(new UnauthorizedError("Token is invalid."));
+    }
+
+    const decoded = verifyToken(token);
+
+    const artistId = decoded.id;
+    const artist = await Artist.findByPk(artistId);
+    if (!artist) {
+      return next(new UnauthorizedError("Artist not found."));
+    }
+    req.artist = artist;
+    req.artistId = artistId;
     next();
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
