@@ -10,5 +10,5 @@ export const generateToken = (userId: string): string => {
 };
 
 export const verifyToken = (token: string) => {
-  return jwt.verify(token, config.jwt.secret) as jwt.JwtPayload;
+  return jwt.verify(token, process.env.JWT_SECRET as string) as jwt.JwtPayload;
 };
