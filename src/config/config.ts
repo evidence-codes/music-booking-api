@@ -12,7 +12,5 @@ export const config = {
   jwt: {
     secret: getEnvValue("JWT_SECRET"),
     expiresIn: getEnvValue("JWT_SECRET_EXPIRE"),
-    refreshTokenExpiresIn: getEnvValue("JWT_REFRESH_SECRET_EXPIRE"),
-    resetTokenExpiresIn: getEnvValue("JWT_RESET_SECRET_EXPIRE"),
   },
 };
