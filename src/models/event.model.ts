@@ -5,8 +5,10 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  HasMany,
 } from "sequelize-typescript";
 import { Artist } from "./artist.model";
+import { Booking } from "./booking.model";
 
 @Table({ tableName: "events" })
 export class Event extends Model<Event> {
@@ -37,4 +39,12 @@ export class Event extends Model<Event> {
 
   @BelongsTo(() => Artist)
   artist!: Artist;
+
+  @HasMany(() => Booking)
+  bookings!: Booking[];
+
+  // Virtual field to get the booking count dynamically
+  get bookingCount(): number {
+    return this.bookings ? this.bookings.length : 0;
+  }
 }

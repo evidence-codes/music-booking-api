@@ -7,7 +7,7 @@ import {
   BelongsTo,
 } from "sequelize-typescript";
 import { Event } from "./event.model";
-import { User } from "./user.model"; // Assuming you have a User model
+import { User } from "./user.model";
 
 @Table({ tableName: "bookings" })
 export class Booking extends Model<Booking> {
@@ -33,6 +33,7 @@ export class Booking extends Model<Booking> {
 
   @Column({
     type: DataType.STRING,
+    defaultValue: "pending",
     allowNull: false,
   })
   status!: string;
